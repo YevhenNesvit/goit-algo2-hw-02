@@ -1,5 +1,6 @@
 from typing import List, Dict
 
+
 def rod_cutting_memo(length: int, prices: List[int]) -> Dict:
     """
     Знаходить оптимальний спосіб розрізання через мемоізацію
@@ -11,7 +12,7 @@ def rod_cutting_memo(length: int, prices: List[int]) -> Dict:
     Returns:
         Dict з максимальним прибутком та списком розрізів
     """
-    
+
     memo = [-1] * (length + 1)
     cuts = [-1] * (length + 1)
 
@@ -20,14 +21,14 @@ def rod_cutting_memo(length: int, prices: List[int]) -> Dict:
             return 0
         if memo[n] != -1:
             return memo[n]
-        
+
         max_profit = 0
         for i in range(1, n + 1):
             profit = prices[i - 1] + helper(n - i)
             if profit > max_profit:
                 max_profit = profit
                 cuts[n] = i
-        
+
         memo[n] = max_profit
         return max_profit
 
@@ -46,6 +47,7 @@ def rod_cutting_memo(length: int, prices: List[int]) -> Dict:
         "number_of_cuts": len(cut_lengths) - 1
     }
 
+
 def rod_cutting_table(length: int, prices: List[int]) -> Dict:
     """
     Знаходить оптимальний спосіб розрізання через табуляцію
@@ -57,7 +59,7 @@ def rod_cutting_table(length: int, prices: List[int]) -> Dict:
     Returns:
         Dict з максимальним прибутком та списком розрізів
     """
-    
+
     dp = [0] * (length + 1)
     cuts = [[] for _ in range(length + 1)]
 
@@ -78,6 +80,7 @@ def rod_cutting_table(length: int, prices: List[int]) -> Dict:
         "cuts": best_cuts,
         "number_of_cuts": num_cuts
     }
+
 
 def run_tests():
     """Функція для запуску всіх тестів"""
@@ -122,6 +125,7 @@ def run_tests():
         print(f"Кількість розрізів: {table_result['number_of_cuts']}")
 
         print("\nПеревірка пройшла успішно!")
+
 
 if __name__ == "__main__":
     run_tests()
