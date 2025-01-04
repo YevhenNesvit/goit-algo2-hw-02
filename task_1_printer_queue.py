@@ -1,6 +1,7 @@
 from typing import List, Dict
 from dataclasses import dataclass
 
+
 @dataclass
 class PrintJob:
     id: str
@@ -8,10 +9,12 @@ class PrintJob:
     priority: int
     print_time: int
 
+
 @dataclass
 class PrinterConstraints:
     max_volume: float
     max_items: int
+
 
 def optimize_printing(print_jobs: List[Dict], constraints: Dict) -> Dict:
     """
@@ -34,7 +37,8 @@ def optimize_printing(print_jobs: List[Dict], constraints: Dict) -> Dict:
 
     # Додаємо моделі до черги відповідно до обмежень
     for job in sorted_jobs:
-        if total_volume + job["volume"] <= constraints["max_volume"] and items_count < constraints["max_items"]:
+        if total_volume + job["volume"] <= constraints["max_volume"] \
+                and items_count < constraints["max_items"]:
             print_order.append(job["id"])
             total_time = max(total_time, job["print_time"])
             total_volume += job["volume"]
@@ -47,6 +51,7 @@ def optimize_printing(print_jobs: List[Dict], constraints: Dict) -> Dict:
         "print_order": print_order,
         "total_time": total_time
     }
+
 
 # Тестування
 def test_printing_optimization():
@@ -90,6 +95,7 @@ def test_printing_optimization():
     result3 = optimize_printing(test3_jobs, constraints)
     print(f"Порядок друку: {result3['print_order']}")
     print(f"Загальний час: {result3['total_time']} хвилин")
+
 
 if __name__ == "__main__":
     test_printing_optimization()
